@@ -1,0 +1,14 @@
+overwrite: true
+schema:
+  src/**/*.ts:
+    noRequire: true
+generates:
+  src/types/generated.ts:
+    config:
+      contextType: src/types#Context
+      namingConvention:
+        enumValues: change-case#upperCase
+      useIndexSignature: true
+    plugins:
+      - typescript
+      - typescript-resolvers
