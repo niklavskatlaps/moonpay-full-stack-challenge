@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Media } from 'react-data-table-component';
+import { size } from '../components/utils/device';
 
 interface WindowDimensions {
     width: number;
@@ -8,11 +9,13 @@ interface WindowDimensions {
 }
 
 const getMedia = (width: number): Media => {
-    if (width <= 599) {
+    const { mobile, tablet } = size;
+
+    if (width <= mobile) {
         return Media.SM;
     }
 
-    if (width <= 959) {
+    if (width <= tablet) {
         return Media.MD;
     }
 

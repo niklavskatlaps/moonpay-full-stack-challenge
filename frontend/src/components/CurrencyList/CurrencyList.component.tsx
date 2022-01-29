@@ -4,8 +4,10 @@ import DataTable, { Media } from 'react-data-table-component';
 import axios from 'axios';
 import { getEnv } from '../utils/env';
 import Toggle from '../Toggle';
+import Button from '../Button';
 import { Currency } from './CurrencyList.types';
 import ToggleWrapper from './styled/ToggleWrapper.styled';
+import ActionsWrapper from './styled/ActionsWrapper.styled';
 
 const columns: TableColumn<Currency>[] = [
     {
@@ -76,20 +78,33 @@ function CurrencyList(): JSX.Element {
         void fetchCurrencies();
     }, []);
 
+    // https://stackoverflow.com/a/46545530
+    const shuffleCurrencies = (): void => {
+        const shuffled = currencies
+            .map(value => ({ value, sort: Math.random() }))
+            .sort((a, b) => a.sort - b.sort)
+            .map(({ value }) => value);
+
+        setCurrencies(shuffled);
+    };
+
     return (
         <div className="CurrencyList">
-            <ToggleWrapper>
-                <Toggle
-                  label="Hide currencies not supported in the US"
-                  isChecked={ hideNotSupportedInUS }
-                  onToggle={ () => { setHideNotSupportedInUS(!hideNotSupportedInUS); } }
-                />
-                <Toggle
-                  label="Hide currencies not available in the test mode"
-                  isChecked={ hideNotAvailableInTestMode }
-                  onToggle={ () => { setHideNotAvailableInTestMode(!hideNotAvailableInTestMode); } }
-                />
-            </ToggleWrapper>
+            <ActionsWrapper>
+                <Button onClick={ shuffleCurrencies }>Shuffle</Button>
+                <ToggleWrapper>
+                    <Toggle
+                      label="Hide currencies not supported in the US"
+                      isChecked={ hideNotSupportedInUS }
+                      onToggle={ () => { setHideNotSupportedInUS(!hideNotSupportedInUS); } }
+                    />
+                    <Toggle
+                      label="Hide currencies not available in the test mode"
+                      isChecked={ hideNotAvailableInTestMode }
+                      onToggle={ () => { setHideNotAvailableInTestMode(!hideNotAvailableInTestMode); } }
+                    />
+                </ToggleWrapper>
+            </ActionsWrapper>
             <DataTable
               columns={ columns }
               data={ filteredCurrencies }
