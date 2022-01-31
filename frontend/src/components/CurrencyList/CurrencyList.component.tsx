@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import type { TableColumn, TableStyles } from 'react-data-table-component';
 import DataTable, { Media } from 'react-data-table-component';
 import axios from 'axios';
-import { getEnv } from '../utils/env';
+import { getEnv } from '../../utils/env';
 import Toggle from '../Toggle';
 import Button from '../Button';
 import { Currency } from './CurrencyList.types';

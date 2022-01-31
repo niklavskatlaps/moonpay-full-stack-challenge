@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Media } from 'react-data-table-component';
-import { size } from '../components/utils/device';
+import { size } from '../utils/device';
 
 interface WindowDimensions {
     width: number;
